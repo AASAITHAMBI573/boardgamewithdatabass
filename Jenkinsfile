@@ -38,7 +38,16 @@ pipeline {
         stage('SonarQube'){
             steps{
                 withSonarQubeEnv('sonar') {
-                sh''' "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BoardGame -Dsonar.projectKey=BoardGame -Dsonar.java.binaries=. '''
+                sh''' "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BoardGame -Dsonar.projectKey=BoardGame /
+                        -Dsonar.java.binaries=. '''
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                script{
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-pass'
                 }
             }
         }
