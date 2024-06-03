@@ -29,9 +29,9 @@ pipeline {
             }
         }
 
-        stage('File System Scan') {
-            steps {
-                sh "trivy fs --format table -o trivy-fs-report.html ."
+        stage('Trivy FS Scan'){
+            steps{
+                sh "trivy fs --format table -o fs-report.html ."
             }
         }
 
@@ -44,7 +44,7 @@ pipeline {
             }
         }
 
-        stage('File System Scan') {
+        stage('Quality Gate') {
             steps {
                 script{
                     waitForQualityGate abortPipeline: false, credentialsId: 'sonar-pass'
