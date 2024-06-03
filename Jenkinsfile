@@ -6,8 +6,8 @@ pipeline {
         maven 'maven3'
     }
 
-    enviornment {
-        SCANNER_HOME= tool 'sonar-scanner'
+    environment {
+        SCANNER_HOME = tool 'sonar-scanner'
     }
 
     stages {
@@ -35,11 +35,11 @@ pipeline {
             }
         }
 
-        stage('File System Scan') {
+        stage('SonarQube Analsyis') {
             steps {
-            withSonarQubeEnv(credentialsId: 'sonar') {
-                sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BoardGame -Dsonar.projectKey=BoardGame \
-                -Dsonar.java.binaries=. '''
+                withSonarQubeEnv(credentialsId: 'sonar') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BoardGame -Dsonar.projectKey=BoardGame \
+                        -Dsonar.java.binaries=. '''
                 }
             }
         }
