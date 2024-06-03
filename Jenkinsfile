@@ -1,14 +1,14 @@
 pipeline {
     agent any
 
-        tools {
-            jdk 'jdk17'
-            maven 'maven3'
-        }
+    tools {
+        jdk 'jdk17'
+        maven 'maven3'
+    }
 
-        enviornment {
-            SCANNER_HOME= tool 'sonar-scanner'
-        }
+    enviornment {
+        SCANNER_HOME= tool 'sonar-scanner'
+    }
 
     stages {
         stage('Git Checkout') {
@@ -37,9 +37,9 @@ pipeline {
 
         stage('File System Scan') {
             steps {
-                withSonarQubeEnv(credentialsId: 'sonar') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BoardGame -Dsonar.projectKey=BoardGame \
-                    -Dsonar.java.binaries=. '''
+            withSonarQubeEnv(credentialsId: 'sonar') {
+                sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=BoardGame -Dsonar.projectKey=BoardGame \
+                -Dsonar.java.binaries=. '''
                 }
             }
         }
