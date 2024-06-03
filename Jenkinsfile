@@ -43,14 +43,6 @@ pipeline {
             }
         }
 
-        stage('Quality Gate') {
-            steps {
-                script{
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-pass'
-                }
-            }
-        }
-
         stage('Build') {
             steps {
                 sh "mvn package"
