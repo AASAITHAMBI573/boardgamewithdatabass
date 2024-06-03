@@ -36,6 +36,31 @@ pipeline {
                 sh "trivy fs --format table -o trivy-fs-report.html ."
             }
         }
+
+        stage('File System Scan') {
+            steps {
+                withSonarQubeEnv(credentialsId: 'sonar') {
+                    sh ''' $SCANNER_HOME/bin/sonar-scanner 
+                    -Dsonar.projectName=BoardGame 
+                    -Dsonar.projectKey=BoardGame \
+                    -Dsonar.java.binaries=. '''
+                }
+            }
+        }
+
+        stage('File System Scan') {
+            steps {
+                script{
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-pass'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh "mvn package"
+            }
+        }
     }
 }
 
