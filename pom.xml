@@ -116,6 +116,17 @@
 		</plugins>
 	</build>
 
+  <distributionManagement>
+    <releasesRepository>
+      <id>maven-releases</id>
+      <url>http://3.84.102.83:8081/repository/maven-releases/</url>
+    </releasesRepository>
+    <snapshotRepository>
+      <id>maven-snapshots</id>
+      <url>http://3.84.102.83:8081/repository/maven-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
 	
 
 </project>
