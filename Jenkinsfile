@@ -44,9 +44,9 @@ pipeline{
 
         stage('Docker Build & Tag'){
             steps{
-                        sh "docker build -t aasaithambi5/boardgame:v${BUILD_NUMBER} ."
-                        sh "docker tag boardgame aasaithambi5/boardgame:v${BUILD_NUMBER}"
-                        sh "docker tag boardgame aasaithambi5/boardgame:latest"
+                        sh 'docker build -t aasaithambi5/boardgame:v${BUILD_NUMBER} .'
+                        sh 'docker tag boardgame aasaithambi5/boardgame:v${BUILD_NUMBER}'
+                        sh 'docker tag boardgame aasaithambi5/boardgame:latest'
             }
         }
 
@@ -54,8 +54,8 @@ pipeline{
             steps{
                 script{
                    withDockerRegistry(credentialsId: 'docker-credential', toolName: 'docker'){ 
-                       sh "docker push aasaithambi5/boardgame:v${BUILD_NUMBER}"
-                       sh "docker tag boardgame aasaithambi5/boardgame:latest"
+                       sh 'docker push aasaithambi5/boardgame:v${BUILD_NUMBER}'
+                       sh 'docker tag boardgame aasaithambi5/boardgame:latest'
                     }
                 }
             }
