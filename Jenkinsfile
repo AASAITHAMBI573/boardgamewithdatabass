@@ -5,6 +5,10 @@ pipeline{
         maven 'maven3'
     }
 
+    environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
+
     stages{
         stage('Git Checkout Code'){
         steps{
@@ -21,6 +25,14 @@ pipeline{
         stage('Maven Unit Tests'){
             steps{
                 sh "mvn test"
+            }
+        }
+
+        stage('SonarQube Code Analysis'){
+            steps{
+                withSonarQubeEnv('sonar-server') {
+                sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectKey=boardgame -Dsonar.projectName=boardgame"
+                }
             }
         }
     }
