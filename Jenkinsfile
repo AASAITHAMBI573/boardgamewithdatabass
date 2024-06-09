@@ -62,6 +62,7 @@ pipeline{
         stage('Docker Images Delete'){
             steps{
                         sh "docker rmi aasaithambi5/boardgame:v${BUILD_NUMBER}"
+                        sh "docker rmi boardgame:latest"
             }
         }
     }
