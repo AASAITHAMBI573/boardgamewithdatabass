@@ -1,10 +1,26 @@
 pipeline{
     agent any
 
+    tools{
+        maven 'maven3'
+    }
+
     stages{
         stage('Git Checkout Code'){
         steps{
             git credentialsId: 'git-credential', url: 'https://github.com/AASAITHAMBI573/boardgamewithdatabass.git'
+            }
+        }
+
+        stage('Maven Compile'){
+            steps{
+                sh "mvn compile"
+            }
+        }
+
+        stage('Maven Unit Tests'){
+            steps{
+                sh "mvn test"
             }
         }
     }
