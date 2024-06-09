@@ -36,12 +36,10 @@ pipeline{
             }
         }
 
-        stage("SonarQube Code Quality Gate"){
-           steps {
-                script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-credential' 
-                }
+        stage('Maven Build'){
+            steps{
+                sh "maven clean package"
             }
-        }
+        } 
     }
 }
