@@ -44,8 +44,8 @@ pipeline{
 
         stage('Docker Build & Tag'){
             steps{
-                        sh "docker build -t boardgame ."
-                        sh "docker tag boardgame aasaithambi5/boardgame:v${BUILD_NUMBER}"
+                sh "docker build -t boardgame ."
+                sh "docker tag boardgame aasaithambi5/boardgame:v${BUILD_NUMBER}"
             }
         }
 
@@ -61,8 +61,8 @@ pipeline{
 
         stage('Docker Images Delete'){
             steps{
-                        sh "docker rmi aasaithambi5/boardgame:v${BUILD_NUMBER}"
-                        sh "docker rmi boardgame:latest"
+                sh "docker rmi aasaithambi5/boardgame:v${BUILD_NUMBER}"
+                sh "docker rmi boardgame:latest"
             }
         }
     }
