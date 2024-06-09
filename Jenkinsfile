@@ -48,5 +48,15 @@ pipeline{
                         sh "docker tag boardgame aasaithambi5/boardgame:v${BUILD_NUMBER}"
             }
         }
+
+        stage("Docker Image Push Registry"){
+            steps{
+                script{
+                   withDockerRegistry(credentialsId: 'docker-credential', toolName: 'docker'){ 
+                       sh "docker push aasaithambi5/boardgame:v${BUILD_NUMBER} "
+                    }
+                }
+            }
+        }
     }
 }
