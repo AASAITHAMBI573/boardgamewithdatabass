@@ -44,7 +44,7 @@ pipeline{
 
         stage('Docker Build & Tag'){
             steps{
-                        sh "docker build -t aasaithambi5/boardgame:v${BUILD_NUMBER}."
+                        sh "docker build -t aasaithambi5/boardgame:v${BUILD_NUMBER} ."
                         sh "docker tag boardgame aasaithambi5/boardgame:v${BUILD_NUMBER}"
             }
         }
