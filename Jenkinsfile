@@ -12,6 +12,13 @@ pipeline{
     }
 
     stages{
+
+        stage("Cleanup Workspace") {
+            steps {
+                cleanWs()
+            }
+        }
+        
         stage('Git Checkout Code'){
         steps{
             git credentialsId: 'git-credential', url: 'https://github.com/AASAITHAMBI573/boardgamewithdatabass.git'
