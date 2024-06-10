@@ -99,7 +99,7 @@ pipeline{
                    git add deployment.yaml
                    git commit -m "Update deployment image to version v${BUILD_NUMBER}"
                 """
-                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+                withCredentials([gitUsernamePassword(credentialsId: 'git-credential', gitToolName: 'Default')]) {
                   sh "git push https://github.com/AASAITHAMBI573/boardgamewithdatabass.git master"
                 }
             }
