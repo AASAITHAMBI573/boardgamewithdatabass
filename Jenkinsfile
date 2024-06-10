@@ -85,7 +85,7 @@ pipeline{
             steps {
                 sh """
                    cat deploymentsfiles/deployment.yaml
-                   sed -i 's+boardgame: .*+boardgame:v${BUILD_NUMBER}+g' deploymentsfiles/deployment.yaml
+                   sed -i "s/boardgame:.*/boardgame:v${BUILD_NUMBER}/g" deploymentsfiles/deployment.yaml
                    cat deploymentsfiles/deployment.yaml
                 """
             }
