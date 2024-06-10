@@ -75,23 +75,10 @@ pipeline{
             }
         }
 
-        stage('Commit & Push Manifest') {
-            steps {
-                script {
-                    // Checkout code from git
-                    git branch: 'master', credentialsId: 'git-credential', url: 'https://github.com/AASAITHAMBI573/boardgamewithdatabass.git'
-                    sh "git config user.email 'aasai05071993@gmail.com'"
-                    sh "git config user.name 'Aasai'"
-                    sh("sed -i 's+boardgame: .*+boardgame:v${BUILD_NUMBER}+g' deploymentsfiles/deployment.yaml")
-                    
-                    withCredentials([gitUsernamePassword(credentialsId: 'git-credential', gitToolName: 'Default')]) {
-                        sh 'git fetch origin'
-                        sh 'git add -u'
-                        sh 'Update deployment image to version v${BUILD_NUMBER}'
-                        sh 'git push origin master'
-                    }
-                }
-            }
+        stage("Checkout from SCM") {
+               steps {
+                   git branch: 'master', credentialsId: 'git-credential', url: 'https://github.com/AASAITHAMBI573/boardgamewithdatabass.git'
+               }
         }
     }
 }
