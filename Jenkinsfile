@@ -86,7 +86,7 @@ pipeline{
                     withCredentials([gitUsernamePassword(credentialsId: 'git-credential', gitToolName: 'Default')]) {
                         sh 'git fetch origin'
                         sh 'git add -u'
-                        sh "Update deployment image to version v${BUILD_NUMBER}'"
+                        sh 'Update deployment image to version v${BUILD_NUMBER}'
                         sh 'git push origin master'
                     }
                 }
