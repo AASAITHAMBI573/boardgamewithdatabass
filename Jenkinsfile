@@ -72,7 +72,7 @@ pipeline{
                 GIT_USER_NAME = "AASAITHAMBI573"
             }
             steps {
-                git branch: 'main', credentialsId: 'git-credential', url: 'https://github.com/AASAITHAMBI573/boardgamewithdatabass.git'
+                git branch: 'master', credentialsId: 'git-credential', url: 'https://github.com/AASAITHAMBI573/boardgamewithdatabass.git'
             }
         }
 
