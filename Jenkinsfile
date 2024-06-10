@@ -78,7 +78,17 @@ pipeline{
         stage("Checkout from SCM") {
                steps {
                    git branch: 'master', credentialsId: 'git-credential', url: 'https://github.com/AASAITHAMBI573/boardgamewithdatabass.git'
-               }
+            }
+        }
+
+        stage("Update the Deployment Tags") {
+            steps {
+                sh """
+                   cat deployment.yaml
+                   sed -i "s/boardgame: .*/boardgame:v${BUILD_NUMBER}/g" deploymentsfiles/deployment.yaml
+                   cat deployment.yaml
+                """
+            }
         }
     }
 }
