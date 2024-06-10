@@ -81,7 +81,7 @@ pipeline{
                         sh 'git fetch origin'
                         sh 'git add -u'
                         sh 'Update deployment image to version v${BUILD_NUMBER}'
-                        sh 'git push https://github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master'
+                        sh 'git push origin master'
                     }
                 }
             }
