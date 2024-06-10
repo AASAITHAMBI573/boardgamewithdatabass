@@ -78,7 +78,7 @@ pipeline{
 
         stage('Commit & Push Manifest'){
             steps{
-                withCredentials([string(credentialsId: 'git-credential', variable: 'git-credential')]){
+                withCredentials([string(credentialsId: 'git-credential', variable: 'GITHUB_TOKEN')]){
                 sh '''
                     git config user.email "aasai05071993@gmail.com" 
                     git config user.name "Aasai"
