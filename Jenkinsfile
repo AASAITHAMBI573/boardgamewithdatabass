@@ -65,5 +65,31 @@ pipeline{
                 sh "docker rmi boardgame:latest"
             }
         }
+
+        stage('Update Deployment File'){
+            environment{
+                GIT_REPO_NAME = "boardgamewithdatabass"
+                GIT_USER_NAME = "AASAITHAMBI573"
+            }
+            steps {
+                git branch: 'main', credentialsId: 'git-credential', url: 'https://github.com/AASAITHAMBI573/boardgamewithdatabass.git'
+            }
+        }
+
+        stage('Update Deployment File'){
+            steps{
+                withCredentials([string(credentialsId: 'git-credential', variable: 'git-credential')]){
+                sh '''
+                    git config user.email "aasai05071993@gmail.com" 
+                    git config user.name "Aasai"
+                    sed -i "s/boardgame: .*/boardgame:v${BUILD_NUMBER}/g" deploymentfiles/deployment.yml
+                    git add .
+                    git commit -m "Update deployment image to version v${BUILD_NUMBER}"
+                    git push https://${gitopspasswd}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                    
+                '''
+                }
+            }
+        }
     }
 }
