@@ -73,21 +73,5 @@ pipeline{
                 git branch: 'master', credentialsId: 'git-credential', url: 'https://github.com/AASAITHAMBI573/boardgamewithdatabass.git' 
             }
         }
-
-        stage('Commit & Push Manifest'){
-            steps{
-                withCredentials([string(credentialsId: 'git-credential', variable: 'git-credential')]){
-                sh '''
-                    git config user.email "aasai05071993@gmail.com" 
-                    git config user.name "Aasai"
-                    sed -i "s/boardgame: .*/boardgame:v${BUILD_NUMBER}/g" deploymentsfiles/deployment.yaml
-                    git add .
-                    git commit -m "Update deployment image to version v${BUILD_NUMBER}"
-                    git push https://${git-credential}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
-                    
-                '''
-                }
-            }
-        }
     }
 }
