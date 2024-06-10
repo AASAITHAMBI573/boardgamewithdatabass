@@ -82,7 +82,7 @@ pipeline{
                 sh '''
                     git config user.email "aasai05071993@gmail.com" 
                     git config user.name "Aasai"
-                    sed -i "s/boardgame: .*/boardgame:v${BUILD_NUMBER}/g" deploymentfiles/deployment.yml
+                    sed -i "s/boardgame: .*/boardgame:v${BUILD_NUMBER}/g" deploymentsfiles/deployment.yaml
                     git add .
                     git commit -m "Update deployment image to version v${BUILD_NUMBER}"
                     git push https://${gitopspasswd}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
