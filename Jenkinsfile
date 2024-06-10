@@ -76,7 +76,7 @@ pipeline{
             }
         }
 
-        stage('Update Deployment File'){
+        stage('Commit & Push Manifest'){
             steps{
                 withCredentials([string(credentialsId: 'git-credential', variable: 'git-credential')]){
                 sh '''
