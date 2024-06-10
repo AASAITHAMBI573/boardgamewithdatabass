@@ -84,9 +84,9 @@ pipeline{
         stage("Update the Deployment Tags") {
             steps {
                 sh """
-                   cat deployment.yaml
+                   cat deploymentsfiles/deployment.yaml
                    sed -i "s/boardgame: .*/boardgame:v${BUILD_NUMBER}/g" deploymentsfiles/deployment.yaml
-                   cat deployment.yaml
+                   cat deploymentsfiles/deployment.yaml
                 """
             }
         }
