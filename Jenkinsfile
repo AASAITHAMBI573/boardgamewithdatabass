@@ -7,6 +7,8 @@ pipeline{
 
     environment {
         SCANNER_HOME=tool 'sonar-scanner'
+        GIT_REPO_NAME = 'boardgamewithdatabass'
+        GIT_USER_NAME = 'AASAITHAMBI573'
     }
 
     stages{
@@ -66,26 +68,22 @@ pipeline{
             }
         }
 
-        stage('Update Deployment File'){
-            environment{
-                GIT_REPO_NAME = "boardgamewithdatabass"
-                GIT_USER_NAME = "AASAITHAMBI573"
-            }
-            steps {
-                git branch: 'master', credentialsId: 'git-credential', url: 'https://github.com/AASAITHAMBI573/boardgamewithdatabass.git'
+        stage('SCM Checkout'){
+            steps{
+                git branch: 'master', credentialsId: 'git-credential', url: 'https://github.com/AASAITHAMBI573/boardgamewithdatabass.git' 
             }
         }
 
         stage('Commit & Push Manifest'){
             steps{
-                withCredentials([string(credentialsId: 'git-credential', variable: 'GITHUB_TOKEN')]){
+                withCredentials([string(credentialsId: 'git-credential', variable: 'git-credential')]){
                 sh '''
                     git config user.email "aasai05071993@gmail.com" 
                     git config user.name "Aasai"
                     sed -i "s/boardgame: .*/boardgame:v${BUILD_NUMBER}/g" deploymentsfiles/deployment.yaml
                     git add .
                     git commit -m "Update deployment image to version v${BUILD_NUMBER}"
-                    git push https://${gitopspasswd}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                    git push https://${git-credential}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:master
                     
                 '''
                 }
