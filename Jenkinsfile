@@ -96,7 +96,7 @@ pipeline{
                 sh """
                    git config --global user.name "Aasai"
                    git config --global user.email "aasai05071993@gmail.com"
-                   git add deploymentsfiles/deployment.yaml
+                   git add .
                    git commit -m "Update deployment image to version v${BUILD_NUMBER}"
                 """
                 withCredentials([gitUsernamePassword(credentialsId: 'git-credential', gitToolName: 'Default')]) {
